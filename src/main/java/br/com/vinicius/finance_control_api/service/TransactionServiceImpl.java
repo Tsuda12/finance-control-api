@@ -1,6 +1,7 @@
 package br.com.vinicius.finance_control_api.service;
 
 import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionRequestDTO;
+import br.com.vinicius.finance_control_api.controller.response.TransactionDataResponse;
 import br.com.vinicius.finance_control_api.domain.entity.Transaction;
 import br.com.vinicius.finance_control_api.domain.entity.User;
 import br.com.vinicius.finance_control_api.domain.repository.TransactionRepository;
@@ -21,6 +22,14 @@ public class TransactionServiceImpl implements TransactionService {
     public TransactionServiceImpl(UserRepository userRepository, TransactionRepository transactionRepository) {
         this.userRepository = userRepository;
         this.transactionRepository = transactionRepository;
+    }
+
+    @Override
+    public TransactionDataResponse getCardData(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+
+        return transactionRepository.getCardData(user.getId());
     }
 
     @Override
