@@ -1,6 +1,7 @@
 package br.com.vinicius.finance_control_api.domain.entity;
 
 import br.com.vinicius.finance_control_api.controller.request.UserRequestDTO;
+import br.com.vinicius.finance_control_api.controller.request.UserUpdateRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,5 +26,17 @@ public class User {
         this.username = request.username();
         this.email = request.email();
         this.password = request.password();
+    }
+
+    public void update(UserUpdateRequestDTO request) {
+        if (request.username() != null) {
+            this.username = request.username();
+        }
+        if (request.email() != null) {
+            this.email = request.email();
+        }
+        if (request.password() != null) {
+            this.password = request.password();
+        }
     }
 }

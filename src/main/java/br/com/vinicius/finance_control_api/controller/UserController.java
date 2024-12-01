@@ -1,6 +1,7 @@
 package br.com.vinicius.finance_control_api.controller;
 
 import br.com.vinicius.finance_control_api.controller.request.UserRequestDTO;
+import br.com.vinicius.finance_control_api.controller.request.UserUpdateRequestDTO;
 import br.com.vinicius.finance_control_api.service.interfaces.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -22,5 +23,12 @@ public class UserController {
     @Operation(summary = "Create User")
     public void create(@RequestBody @Valid UserRequestDTO request) {
         userService.create(request);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Update User by id")
+    public void update(@PathVariable Long id, @RequestBody @Valid UserUpdateRequestDTO request) {
+        userService.update(id, request);
     }
 }
