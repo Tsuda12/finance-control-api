@@ -1,4 +1,4 @@
-package br.com.vinicius.finance_control_api.controller.request;
+package br.com.vinicius.finance_control_api.controller.request.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

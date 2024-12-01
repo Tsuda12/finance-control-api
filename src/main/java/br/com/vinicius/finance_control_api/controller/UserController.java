@@ -1,7 +1,7 @@
 package br.com.vinicius.finance_control_api.controller;
 
-import br.com.vinicius.finance_control_api.controller.request.UserRequestDTO;
-import br.com.vinicius.finance_control_api.controller.request.UserUpdateRequestDTO;
+import br.com.vinicius.finance_control_api.controller.request.user.UserRequestDTO;
+import br.com.vinicius.finance_control_api.controller.request.user.UserUpdateRequestDTO;
 import br.com.vinicius.finance_control_api.service.interfaces.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;

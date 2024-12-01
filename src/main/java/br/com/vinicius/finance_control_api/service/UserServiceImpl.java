@@ -1,11 +1,10 @@
 package br.com.vinicius.finance_control_api.service;
 
-import br.com.vinicius.finance_control_api.controller.request.UserRequestDTO;
-import br.com.vinicius.finance_control_api.controller.request.UserUpdateRequestDTO;
+import br.com.vinicius.finance_control_api.controller.request.user.UserRequestDTO;
+import br.com.vinicius.finance_control_api.controller.request.user.UserUpdateRequestDTO;
 import br.com.vinicius.finance_control_api.domain.entity.User;
 import br.com.vinicius.finance_control_api.domain.repository.UserRepository;
 import br.com.vinicius.finance_control_api.service.interfaces.UserService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +28,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void update(Long id, UserUpdateRequestDTO request) {
         User user = userRepository.getReferenceById(id);
-
         user.update(request);
     }
 }

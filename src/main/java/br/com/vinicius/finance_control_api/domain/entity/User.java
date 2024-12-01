@@ -1,9 +1,11 @@
 package br.com.vinicius.finance_control_api.domain.entity;
 
-import br.com.vinicius.finance_control_api.controller.request.UserRequestDTO;
-import br.com.vinicius.finance_control_api.controller.request.UserUpdateRequestDTO;
+import br.com.vinicius.finance_control_api.controller.request.user.UserRequestDTO;
+import br.com.vinicius.finance_control_api.controller.request.user.UserUpdateRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -18,8 +20,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
+    @Column(unique = true)
     private String email;
     private String password;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Transaction> transactions;
 
     public User(UserRequestDTO request) {
         this.id = getId();
