@@ -5,6 +5,8 @@ import br.com.vinicius.finance_control_api.domain.projection.TransactionDataProj
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
     @Query(value = """
@@ -48,4 +50,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
                 EXTRACT (YEAR FROM t.date) = :year
             """, nativeQuery = true)
     TransactionDataProjection getCardDataByMonth(Long id, Integer month, Integer year);
+
+    List<Transaction> findAllByUserIdAndValueGreaterThan(Long userId, Double value);
 }

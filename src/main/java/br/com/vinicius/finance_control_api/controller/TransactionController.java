@@ -2,13 +2,14 @@ package br.com.vinicius.finance_control_api.controller;
 
 import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionRequestDTO;
 import br.com.vinicius.finance_control_api.controller.response.TransactionDataResponseDTO;
+import br.com.vinicius.finance_control_api.controller.response.TransactionEarningsExtensesResponseDTO;
 import br.com.vinicius.finance_control_api.service.interfaces.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/transactions")
@@ -34,6 +35,13 @@ public class TransactionController {
                                                   @RequestParam Integer month,
                                                   @RequestParam Integer year) {
         return transactionService.getCardDataByMonth(id, month, year);
+    }
+
+    @GetMapping("/user/{id}/earnings")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Get all earnings")
+    public List<TransactionEarningsExtensesResponseDTO> getAllEarnings(@PathVariable Long id) {
+        return transactionService.getAllEarnings(id);
     }
 
     @PostMapping("/{id}")

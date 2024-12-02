@@ -2,7 +2,7 @@ package br.com.vinicius.finance_control_api.service;
 
 import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionRequestDTO;
 import br.com.vinicius.finance_control_api.controller.response.TransactionDataResponseDTO;
-import br.com.vinicius.finance_control_api.controller.response.TransactionEarningsResponseDTO;
+import br.com.vinicius.finance_control_api.controller.response.TransactionEarningsExtensesResponseDTO;
 import br.com.vinicius.finance_control_api.domain.entity.Transaction;
 import br.com.vinicius.finance_control_api.domain.entity.User;
 import br.com.vinicius.finance_control_api.domain.projection.TransactionDataProjection;
@@ -13,9 +13,6 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
 import java.util.List;
 
 @Service
@@ -51,8 +48,15 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<TransactionEarningsResponseDTO> getAllEarnings(Long id) {
-        return List.of();
+    public List<TransactionEarningsExtensesResponseDTO> getAllEarnings(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+
+        List<Transaction> transactions = transactionRepository.findAllByUserIdAndValueGreaterThan(user.getId(), Double.valueOf(0));
+
+        return transactions.stream()
+                .map(TransactionEarningsExtensesResponseDTO::new)
+                .toList();
     }
 
     @Override

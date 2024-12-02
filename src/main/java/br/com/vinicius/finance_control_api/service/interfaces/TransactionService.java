@@ -2,7 +2,7 @@ package br.com.vinicius.finance_control_api.service.interfaces;
 
 import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionRequestDTO;
 import br.com.vinicius.finance_control_api.controller.response.TransactionDataResponseDTO;
-import br.com.vinicius.finance_control_api.controller.response.TransactionEarningsResponseDTO;
+import br.com.vinicius.finance_control_api.controller.response.TransactionEarningsExtensesResponseDTO;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface TransactionService {
 
     TransactionDataResponseDTO getCardDataByMonth(Long id, Integer month, Integer year);
 
-    List<TransactionEarningsResponseDTO> getAllEarnings(Long id);
+    List<TransactionEarningsExtensesResponseDTO> getAllEarnings(Long id);
 
     void create(Long id, TransactionRequestDTO request);
 }
