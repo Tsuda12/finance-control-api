@@ -52,4 +52,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     TransactionDataProjection getCardDataByMonth(Long id, Integer month, Integer year);
 
     List<Transaction> findAllByUserIdAndValueGreaterThan(Long userId, Double value);
+
+    List<Transaction> findAllByUserIdAndValueLessThan(Long userId, Double value);
 }

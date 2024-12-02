@@ -44,6 +44,13 @@ public class TransactionController {
         return transactionService.getAllEarnings(id);
     }
 
+    @GetMapping("/user/{id}/extenses")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Get all extenses")
+    public List<TransactionEarningsExtensesResponseDTO> getAllExtenses(@PathVariable Long id) {
+        return transactionService.getAllExtenses(id);
+    }
+
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create Transaction")

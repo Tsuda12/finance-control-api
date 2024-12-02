@@ -60,6 +60,18 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
+    public List<TransactionEarningsExtensesResponseDTO> getAllExtenses(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+
+        List<Transaction> transactions = transactionRepository.findAllByUserIdAndValueLessThan(user.getId(), Double.valueOf(0));
+
+        return transactions.stream()
+                .map(TransactionEarningsExtensesResponseDTO::new)
+                .toList();
+    }
+
+    @Override
     @Transactional
     public void create(Long id, TransactionRequestDTO request) {
         User user = userRepository.findById(id)
@@ -67,5 +79,10 @@ public class TransactionServiceImpl implements TransactionService {
 
         Transaction transaction = new Transaction(user, request);
         transactionRepository.save(transaction);
+    }
+
+    @Override
+    public void update(Long id) {
+
     }
 }

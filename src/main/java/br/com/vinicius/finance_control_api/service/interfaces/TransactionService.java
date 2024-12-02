@@ -14,5 +14,9 @@ public interface TransactionService {
 
     List<TransactionEarningsExtensesResponseDTO> getAllEarnings(Long id);
 
+    List<TransactionEarningsExtensesResponseDTO> getAllExtenses(Long id);
+
     void create(Long id, TransactionRequestDTO request);
+
+    void update(Long id);
 }
