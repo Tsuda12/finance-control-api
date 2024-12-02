@@ -4,6 +4,7 @@ import br.com.vinicius.finance_control_api.controller.request.transaction.Transa
 import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionUpdateRequestDTO;
 import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionDataResponseDTO;
 import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionEarningsExtensesResponseDTO;
+import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionGraphDataResponseDTO;
 import br.com.vinicius.finance_control_api.service.interfaces.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -52,6 +53,14 @@ public class TransactionController {
         return transactionService.getAllExtenses(id);
     }
 
+    @GetMapping("/user/{id}/graph")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Get decription to fill graph")
+    public List<TransactionGraphDataResponseDTO> getGraphData(@PathVariable Long id) {
+        return transactionService.getGraphData(id);
+    }
+
+
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create Transaction")
@@ -64,5 +73,12 @@ public class TransactionController {
     @Operation(summary = "Update Transaction")
     public void update(@PathVariable Long id, @RequestBody @Valid TransactionUpdateRequestDTO request) {
         transactionService.update(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Delete Transaction")
+    public void delete(@PathVariable Long id) {
+        transactionService.delete(id);
     }
 }

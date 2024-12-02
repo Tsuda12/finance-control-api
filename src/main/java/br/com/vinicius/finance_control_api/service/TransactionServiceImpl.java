@@ -4,9 +4,11 @@ import br.com.vinicius.finance_control_api.controller.request.transaction.Transa
 import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionUpdateRequestDTO;
 import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionDataResponseDTO;
 import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionEarningsExtensesResponseDTO;
+import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionGraphDataResponseDTO;
 import br.com.vinicius.finance_control_api.domain.entity.Transaction;
 import br.com.vinicius.finance_control_api.domain.entity.User;
 import br.com.vinicius.finance_control_api.domain.projection.TransactionDataProjection;
+import br.com.vinicius.finance_control_api.domain.projection.TransactionGraphData;
 import br.com.vinicius.finance_control_api.domain.repository.TransactionRepository;
 import br.com.vinicius.finance_control_api.domain.repository.UserRepository;
 import br.com.vinicius.finance_control_api.service.interfaces.TransactionService;
@@ -73,6 +75,18 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
+    public List<TransactionGraphDataResponseDTO> getGraphData(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+
+        List<TransactionGraphData> transactions = transactionRepository.getGraphData(user.getId());
+
+        return transactions.stream()
+                .map(TransactionGraphDataResponseDTO::new)
+                .toList();
+    }
+
+    @Override
     @Transactional
     public void create(Long id, TransactionRequestDTO request) {
         User user = userRepository.findById(id)
@@ -89,5 +103,13 @@ public class TransactionServiceImpl implements TransactionService {
                 .orElseThrow(EntityNotFoundException::new);
 
         transaction.update(request);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Transaction transaction = transactionRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+
+        transactionRepository.delete(transaction);
     }
 }

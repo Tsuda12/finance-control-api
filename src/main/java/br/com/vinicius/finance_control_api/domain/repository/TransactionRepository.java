@@ -2,6 +2,7 @@ package br.com.vinicius.finance_control_api.domain.repository;
 
 import br.com.vinicius.finance_control_api.domain.entity.Transaction;
 import br.com.vinicius.finance_control_api.domain.projection.TransactionDataProjection;
+import br.com.vinicius.finance_control_api.domain.projection.TransactionGraphData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -50,6 +51,18 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
                 EXTRACT (YEAR FROM t.date) = :year
             """, nativeQuery = true)
     TransactionDataProjection getCardDataByMonth(Long id, Integer month, Integer year);
+
+    @Query(value = """
+            SELECT 
+                t.description, count(t.description) as value
+            FROM 
+                transactions t
+            WHERE 
+                t.user_id = :id
+            GROUP BY
+                t.description
+            """, nativeQuery = true)
+    List<TransactionGraphData> getGraphData(Long id);
 
     List<Transaction> findAllByUserIdAndValueGreaterThan(Long userId, Double value);
 

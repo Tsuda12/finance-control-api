@@ -4,6 +4,7 @@ import br.com.vinicius.finance_control_api.controller.request.transaction.Transa
 import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionUpdateRequestDTO;
 import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionDataResponseDTO;
 import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionEarningsExtensesResponseDTO;
+import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionGraphDataResponseDTO;
 
 import java.util.List;
 
@@ -16,6 +17,8 @@ public interface TransactionService {
     List<TransactionEarningsExtensesResponseDTO> getAllEarnings(Long id);
 
     List<TransactionEarningsExtensesResponseDTO> getAllExtenses(Long id);
+
+    List<TransactionGraphDataResponseDTO> getGraphData(Long id);
 
     void create(Long id, TransactionRequestDTO request);
 
