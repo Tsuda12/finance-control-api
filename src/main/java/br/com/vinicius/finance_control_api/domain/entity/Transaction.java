@@ -1,6 +1,7 @@
 package br.com.vinicius.finance_control_api.domain.entity;
 
 import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionRequestDTO;
+import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionUpdateRequestDTO;
 import br.com.vinicius.finance_control_api.domain.enums.TypeEnum;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,5 +35,17 @@ public class Transaction {
         this.description = request.description();
         this.value = request.value();
         this.user = user;
+    }
+
+    public void update(TransactionUpdateRequestDTO request) {
+        if (request.description != null) {
+            this.description = request.description;
+        }
+        if (request.value != null) {
+            this.value = request.value;
+        }
+        if (request.date != null) {
+            this.date = request.date;
+        }
     }
 }

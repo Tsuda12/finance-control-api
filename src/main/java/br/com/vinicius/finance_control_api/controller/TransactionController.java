@@ -1,8 +1,9 @@
 package br.com.vinicius.finance_control_api.controller;
 
 import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionRequestDTO;
-import br.com.vinicius.finance_control_api.controller.response.TransactionDataResponseDTO;
-import br.com.vinicius.finance_control_api.controller.response.TransactionEarningsExtensesResponseDTO;
+import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionUpdateRequestDTO;
+import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionDataResponseDTO;
+import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionEarningsExtensesResponseDTO;
 import br.com.vinicius.finance_control_api.service.interfaces.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -56,5 +57,12 @@ public class TransactionController {
     @Operation(summary = "Create Transaction")
     public void create(@PathVariable Long id, @RequestBody @Valid TransactionRequestDTO request) {
         transactionService.create(id, request);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Update Transaction")
+    public void update(@PathVariable Long id, @RequestBody @Valid TransactionUpdateRequestDTO request) {
+        transactionService.update(id, request);
     }
 }

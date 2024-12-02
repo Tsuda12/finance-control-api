@@ -1,7 +1,7 @@
 package br.com.vinicius.finance_control_api.service;
 
-import br.com.vinicius.finance_control_api.controller.request.LoginRequestDTO;
-import br.com.vinicius.finance_control_api.controller.response.UserResponseDTO;
+import br.com.vinicius.finance_control_api.controller.request.login.LoginRequestDTO;
+import br.com.vinicius.finance_control_api.controller.response.user.UserResponseDTO;
 import br.com.vinicius.finance_control_api.domain.entity.User;
 import br.com.vinicius.finance_control_api.domain.repository.UserRepository;
 import br.com.vinicius.finance_control_api.service.interfaces.LoginService;

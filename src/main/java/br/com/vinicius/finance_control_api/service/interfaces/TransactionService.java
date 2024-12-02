@@ -1,8 +1,9 @@
 package br.com.vinicius.finance_control_api.service.interfaces;
 
 import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionRequestDTO;
-import br.com.vinicius.finance_control_api.controller.response.TransactionDataResponseDTO;
-import br.com.vinicius.finance_control_api.controller.response.TransactionEarningsExtensesResponseDTO;
+import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionUpdateRequestDTO;
+import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionDataResponseDTO;
+import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionEarningsExtensesResponseDTO;
 
 import java.util.List;
 
@@ -18,5 +19,7 @@ public interface TransactionService {
 
     void create(Long id, TransactionRequestDTO request);
 
-    void update(Long id);
+    void update(Long id, TransactionUpdateRequestDTO request);
+
+    void delete(Long id);
 }

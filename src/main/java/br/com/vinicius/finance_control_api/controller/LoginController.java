@@ -1,7 +1,7 @@
 package br.com.vinicius.finance_control_api.controller;
 
-import br.com.vinicius.finance_control_api.controller.request.LoginRequestDTO;
-import br.com.vinicius.finance_control_api.controller.response.UserResponseDTO;
+import br.com.vinicius.finance_control_api.controller.request.login.LoginRequestDTO;
+import br.com.vinicius.finance_control_api.controller.response.user.UserResponseDTO;
 import br.com.vinicius.finance_control_api.service.interfaces.LoginService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;

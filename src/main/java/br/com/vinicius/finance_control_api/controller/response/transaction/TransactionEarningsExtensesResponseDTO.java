@@ -1,4 +1,4 @@
-package br.com.vinicius.finance_control_api.controller.response;
+package br.com.vinicius.finance_control_api.controller.response.transaction;
 
 import br.com.vinicius.finance_control_api.domain.entity.Transaction;
 import com.fasterxml.jackson.annotation.JsonFormat;

@@ -1,8 +1,9 @@
 package br.com.vinicius.finance_control_api.service;
 
 import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionRequestDTO;
-import br.com.vinicius.finance_control_api.controller.response.TransactionDataResponseDTO;
-import br.com.vinicius.finance_control_api.controller.response.TransactionEarningsExtensesResponseDTO;
+import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionUpdateRequestDTO;
+import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionDataResponseDTO;
+import br.com.vinicius.finance_control_api.controller.response.transaction.TransactionEarningsExtensesResponseDTO;
 import br.com.vinicius.finance_control_api.domain.entity.Transaction;
 import br.com.vinicius.finance_control_api.domain.entity.User;
 import br.com.vinicius.finance_control_api.domain.projection.TransactionDataProjection;
@@ -82,7 +83,11 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void update(Long id) {
+    @Transactional
+    public void update(Long id, TransactionUpdateRequestDTO request) {
+        Transaction transaction = transactionRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
 
+        transaction.update(request);
     }
 }
