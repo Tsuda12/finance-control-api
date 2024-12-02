@@ -1,7 +1,7 @@
 package br.com.vinicius.finance_control_api.controller;
 
 import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionRequestDTO;
-import br.com.vinicius.finance_control_api.controller.response.TransactionDataResponse;
+import br.com.vinicius.finance_control_api.controller.response.TransactionDataResponseDTO;
 import br.com.vinicius.finance_control_api.service.interfaces.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -21,7 +21,7 @@ public class TransactionController {
     @GetMapping("/user/{id}/data")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Get data Transactions by User to fill cards")
-    public TransactionDataResponse getCardData(@PathVariable Long id) {
+    public TransactionDataResponseDTO getCardData(@PathVariable Long id) {
         return transactionService.getCardData(id);
     }
 

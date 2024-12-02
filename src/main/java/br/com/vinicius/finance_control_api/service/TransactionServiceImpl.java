@@ -1,7 +1,9 @@
 package br.com.vinicius.finance_control_api.service;
 
 import br.com.vinicius.finance_control_api.controller.request.transaction.TransactionRequestDTO;
-import br.com.vinicius.finance_control_api.controller.response.TransactionDataResponse;
+import br.com.vinicius.finance_control_api.controller.response.TransactionDataResponseDTO;
+import br.com.vinicius.finance_control_api.domain.projection.TransactionDataByMonthProjection;
+import br.com.vinicius.finance_control_api.domain.projection.TransactionDataProjection;
 import br.com.vinicius.finance_control_api.domain.entity.Transaction;
 import br.com.vinicius.finance_control_api.domain.entity.User;
 import br.com.vinicius.finance_control_api.domain.repository.TransactionRepository;
@@ -11,7 +13,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -25,11 +27,14 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionDataResponse getCardData(Long id) {
+    @Transactional
+    public TransactionDataResponseDTO getCardData(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
 
-        return transactionRepository.getCardData(user.getId());
+        TransactionDataProjection projection = transactionRepository.getCardData(user.getId());
+
+        return new TransactionDataResponseDTO(projection);
     }
 
     @Override

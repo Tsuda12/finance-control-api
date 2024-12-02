@@ -5,6 +5,8 @@ import br.com.vinicius.finance_control_api.domain.enums.TypeEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "transactions")
 @AllArgsConstructor
@@ -17,6 +19,7 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private LocalDate date;
     @Enumerated(EnumType.STRING)
     private TypeEnum type;
     private String description;
@@ -26,6 +29,7 @@ public class Transaction {
 
     public Transaction(User user, TransactionRequestDTO request) {
         this.id = getId();
+        this.date = request.date();
         this.type = request.type();
         this.description = request.description();
         this.value = request.value();
